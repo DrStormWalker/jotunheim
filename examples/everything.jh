@@ -1,0 +1,41 @@
+malloc :: proc ();
+free :: proc ();
+read :: proc ();
+fdopen :: proc ();
+fprintf :: proc ();
+fflush :: proc ();
+
+stdin :: 0;
+stdout :: 1;
+stderr :: 2;
+
+buf_size :: 256;
+
+read_mode :: "r";
+write_mode :: "w";
+
+failed_to_read_stdin :: "Failed to read from stdin.";
+what_is_your_name :: "What is your name? ";
+hello_fmt :: "Hello, %s";
+
+main :: proc () {
+    stderr_fptr := fdopen(stderr, read_mode);
+    stdout_fptr := fdopen(stdout, write_mode);
+
+    buf := malloc(buf_size);
+
+    fprintf(stdout_fptr, what_is_your_name);
+    fflush(stdout_fptr);
+
+    n := read(stdin, buf, buf_size);
+    if n == 0 {
+        fprintf(stderr_fptr, failed_to_read_stdin);
+    } else {
+        fprintf(stdout_fptr, hello_fmt, buf);
+    }
+
+    free(buf);
+
+    return 0;
+}
+
