@@ -8,6 +8,8 @@ A simple partially implemented language based on the syntax of Odin and Jai usin
 just build
 ```
 
+The resulting binary is found at `out/release/jotunheim`
+
 ## Usage
 
 Compile a file: input.jh
