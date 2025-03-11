@@ -17,7 +17,7 @@ gdb_args := "'-ex=tui e' -ex=r"
 
 build:
 	mkdir -p {{release_dir}}
-	cc {{cc_args}} -o {{release_binary}} {{input_files}}
+	cc -g -O0 {{cc_args}} -o {{release_binary}} {{input_files}}
 
 run *args: build
 	./{{release_binary}} {{args}}
